@@ -1,0 +1,20 @@
+{
+  "name": "blockchain-bootcamp",
+  "version": "1.0.0",
+  "description": "blockchain bootcamp using typescript",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "npm run build && mocha",
+    "main": "npm run build && node src/index.js",
+    "build": "tsc"
+  },
+  "author": "skclusive",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/chai": "^4.1.4",
+    "@types/node": "^10.5.2",
+    "chai": "^4.1.2",
+    "mocha": "^5.2.0",
+    "typescript": "^2.9.2"
+  }
+}
