@@ -1,9 +1,9 @@
-import main from "./main";
+import main from './main';
 
 (async () => {
-    try {
-        await main();
-    } catch (ex) {
-        console.error(ex);
-    }
+  try {
+    await main();
+  } catch (ex) {
+    console.error(ex);
+  }
 })();

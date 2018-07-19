@@ -1,5 +1,5 @@
-import Transaction from "../transaction";
-import { sha256Hash } from "../utils";
+import Transaction from '../transaction';
+import {sha256Hash} from '../utils';
 
 export interface IBlockHash {
   hash: string;
@@ -67,7 +67,7 @@ export default class Block {
     if (!this._hash) {
       this._hash = this.hashBlock;
     } else {
-      throw new Error("Block already finalized");
+      throw new Error('Block already finalized');
     }
     return this;
   }

@@ -1,4 +1,4 @@
-import Block from "../block";
+import Block from '../block';
 
 export default class Blockchain {
   private _blocks: Block[] = [];

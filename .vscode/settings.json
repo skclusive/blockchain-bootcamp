@@ -1,8 +1,7 @@
 {
-    "files.exclude": {
-        "**/*.css": true,
-        "**/*.js": { "when": "$(basename).ts" },
-        "**/*.map": true
-    },
-    "prettier.tabWidth": 4
+  "files.exclude": {
+    "**/*.css": true,
+    "**/*.js": {"when": "$(basename).ts"},
+    "**/*.map": true
+  }
 }

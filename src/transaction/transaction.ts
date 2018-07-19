@@ -23,8 +23,8 @@ export default class Transaction {
   }
 
   toJSON(): ITransaction {
-    const { timestamp, sender, receiver, amount } = this;
-    return { timestamp, sender, receiver, amount };
+    const {timestamp, sender, receiver, amount} = this;
+    return {timestamp, sender, receiver, amount};
   }
 
   static from(data: ITransaction): Transaction {

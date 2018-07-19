@@ -1,5 +1,5 @@
-import Tramsaction, { ITransaction } from "./transaction";
+import Tramsaction, {ITransaction} from './transaction';
 
-export { ITransaction };
+export {ITransaction};
 
 export default Tramsaction;

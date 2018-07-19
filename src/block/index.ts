@@ -1,5 +1,5 @@
-import Block, { IBlockData } from "./block";
+import Block, {IBlockData} from './block';
 
-export { IBlockData };
+export {IBlockData};
 
 export default Block;

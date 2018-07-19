@@ -1,15 +1,15 @@
-import util from "util";
-import fs from "fs";
-import path from "path";
-import crypto from "crypto";
+import util from 'util';
+import fs from 'fs';
+import path from 'path';
+import crypto from 'crypto';
 
-import Blockchain from "../blockchain";
-import Block, { IBlockData } from "../block";
+import Blockchain from '../blockchain';
+import Block, {IBlockData} from '../block';
 
 export function sha256Hash(data: string): string {
-  const hash = crypto.createHash("sha256");
+  const hash = crypto.createHash('sha256');
   hash.update(data);
-  return hash.digest("hex");
+  return hash.digest('hex');
 }
 
 export async function saveChain(
@@ -34,7 +34,7 @@ export async function loadChain(file: string): Promise<Blockchain> {
   try {
     const readFileAsync = util.promisify(fs.readFile);
     let data = await readFileAsync(path.resolve(file), {
-      encoding: "utf8"
+      encoding: 'utf8'
     });
     let blocks = JSON.parse(data as string) as IBlockData[];
     for (let item of blocks) {
