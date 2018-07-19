@@ -1,4 +1,4 @@
-import Block from "./block";
+import Block from "../block";
 
 export default class Blockchain {
     private _blocks: Block[] = [];
@@ -11,8 +11,9 @@ export default class Blockchain {
         return this._blocks.length;
     }
 
-    addBlock(block: Block): void {
+    addBlock(block: Block): Blockchain {
         this._blocks.push(block);
+        return this;
     }
 
     get recentBlock(): Block | null {

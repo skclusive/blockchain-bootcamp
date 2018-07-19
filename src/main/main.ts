@@ -1,7 +1,7 @@
-import Transaction from "./transaction";
-import Block from "./block";
-import Blockchain from "./blockchain";
-import { sha256Hash, saveChain, loadChain } from "./utils";
+import Transaction from "../transaction";
+import Block from "../block";
+import Blockchain from "../blockchain";
+import { sha256Hash, saveChain, loadChain } from "../utils";
 
 export default async function main() {
     // Creating List

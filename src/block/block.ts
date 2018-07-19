@@ -1,5 +1,5 @@
-import Transaction from "./transaction";
-import { sha256Hash } from "./utils";
+import Transaction from "../transaction";
+import { sha256Hash } from "../utils";
 
 export interface IBlockHash {
     hash: string;
@@ -48,8 +48,9 @@ export default class Block {
         return this._transactions.length;
     }
 
-    addTransaction(transaction: Transaction): void {
+    addTransaction(transaction: Transaction): Block {
         this._transactions.push(transaction);
+        return this;
     }
 
     get hashBlock(): string {
@@ -62,12 +63,13 @@ export default class Block {
         return sha256Hash(JSON.stringify(hash));
     }
 
-    finalize(): void {
+    finalize(): Block {
         if (!this._hash) {
             this._hash = this.hashBlock;
         } else {
             throw new Error("Block already finalized");
         }
+        return this;
     }
 
     validate(): boolean {

@@ -2,8 +2,9 @@ import util from "util";
 import fs from "fs";
 import path from "path";
 import crypto from "crypto";
-import Blockchain from "./blockchain";
-import Block, { IBlockData } from "./block";
+
+import Blockchain from "../blockchain";
+import Block, { IBlockData } from "../block";
 
 export function sha256Hash(data: string): string {
     const hash = crypto.createHash("sha256");
