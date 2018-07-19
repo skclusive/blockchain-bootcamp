@@ -24,7 +24,7 @@ export async function saveChain(
         );
         return true;
     } catch (ex) {
-        console.log(`Error while writing blocks to file ${ex}`);
+        console.error(`Error while writing blocks to file ${ex}`);
         throw ex;
     }
 }
@@ -41,7 +41,7 @@ export async function loadChain(file: string): Promise<Blockchain> {
             blockchain.addBlock(Block.from(blockchain.recentBlock, item));
         }
     } catch (ex) {
-        console.log(`Error while loading blocks from file ${ex}`);
+        console.error(`Error while loading blocks from file ${ex}`);
         throw ex;
     }
     return blockchain;

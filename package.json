@@ -6,6 +6,7 @@
     "scripts": {
         "main": "npm run build && ts-node src/index.ts",
         "build": "tsc",
+        "lint": "tslint -p .",
         "test": "cross-env NODE_ENV=production TS_NODE_COMPILER_OPTIONS={\\\"module\\\":\\\"commonjs\\\",\\\"declaration\\\":false} jest --runInBand"
     },
     "author": "skclusive <skclusive@outlook.com>",
@@ -17,6 +18,9 @@
         "jest": "^23.4.1",
         "ts-jest": "^23.0.1",
         "ts-node": "^7.0.0",
+        "tslint": "^5.11.0",
+        "tslint-config-prettier": "^1.13.0",
+        "tslint-loader": "^3.6.0",
         "typescript": "^2.9.2"
     },
     "jest": {

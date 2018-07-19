@@ -6,33 +6,33 @@ import { sha256Hash, saveChain, loadChain } from "../utils";
 export default async function main() {
     // Creating List
     let mylist = [1, 1, 2, 3, 5, 8];
-    console.log(`\nLength: ${mylist.length}`);
+    console.info(`\nLength: ${mylist.length}`);
 
     // Appending to List
     mylist.push(13);
-    console.log("\nList Elements: ", mylist);
+    console.info("\nList Elements: ", mylist);
 
     // Slicing list
-    console.log("\nSlicing List");
+    console.info("\nSlicing List");
 
-    console.log("slice(1,3): ", mylist.slice(1, 3));
-    console.log("slice(0,3): ", mylist.slice(0, 3));
-    console.log("slice(-1): ", mylist.slice(-1));
-    console.log("slice(-2): ", mylist.slice(-2));
+    console.info("slice(1,3): ", mylist.slice(1, 3));
+    console.info("slice(0,3): ", mylist.slice(0, 3));
+    console.info("slice(-1): ", mylist.slice(-1));
+    console.info("slice(-2): ", mylist.slice(-2));
 
     // Iterating list
-    console.log("\nIterating List");
+    console.info("\nIterating List");
     for (let item of mylist) {
-        console.log(item);
+        console.info(item);
     }
 
     // Dict
     let person = { name: "Senthilnathan", country: "India", age: 34 };
-    console.log("\nDict: ", person);
+    console.info("\nDict: ", person);
 
     // Creating hash for a string
 
-    console.log(
+    console.info(
         "\nHash for 'Blockchain is simple': ",
         sha256Hash("Blockchain is simple")
     );
@@ -41,11 +41,11 @@ export default async function main() {
 
     let txn1 = new Transaction("Senthilnathan", "Naguvan", 10);
 
-    console.log("\n" + txn1.toString());
+    console.info("\n" + txn1.toString());
 
     let txn2 = new Transaction("Naguvan", "Dev", 20);
 
-    console.log("\n" + txn2.toString());
+    console.info("\n" + txn2.toString());
 
     let myblockchain = new Blockchain();
 
@@ -55,27 +55,27 @@ export default async function main() {
 
     block.addTransaction(txn2);
 
-    console.log(`\nTransaction Count: ${block.transactionCount}`);
+    console.info(`\nTransaction Count: ${block.transactionCount}`);
 
     block.finalize();
 
-    console.log(`\nValidate Block: ${block.validate()}`);
+    console.info(`\nValidate Block: ${block.validate()}`);
 
     // let txn3 = new Transaction("Pardha", "Vinita", 30);
 
     // block.addTransaction(txn3);
 
-    console.log(`\nTransaction Count: ${block.transactionCount}`);
+    console.info(`\nTransaction Count: ${block.transactionCount}`);
 
-    console.log(`\nValidate Block (Before Finalize): ${block.validate()}`);
+    console.info(`\nValidate Block (Before Finalize): ${block.validate()}`);
 
     try {
         block.finalize();
     } catch (err) {
-        console.log(`Expected error. re calling finalize throws error`);
+        console.info(`Expected error. re calling finalize throws error`);
     }
 
-    console.log(`\nValidate Block (After Finalize): ${block.validate()}`);
+    console.info(`\nValidate Block (After Finalize): ${block.validate()}`);
 
     myblockchain.addBlock(block);
 
@@ -93,27 +93,27 @@ export default async function main() {
 
     myblockchain.addBlock(block);
 
-    console.log(`\nLength of Blockchain: ${myblockchain.count}`);
+    console.info(`\nLength of Blockchain: ${myblockchain.count}`);
 
-    console.log(`myblockchain is valid: ${myblockchain.validateChain()}`);
+    console.info(`myblockchain is valid: ${myblockchain.validateChain()}`);
 
     // Save blockchain to file
 
     if (await saveChain("./data/blockchain.json", myblockchain)) {
-        console.log(
+        console.info(
             "\nBlockchain saved successfully into file blockchain.json"
         );
     }
 
-    console.log(`myblockchain blocks: ${myblockchain.count}`);
+    console.info(`myblockchain blocks: ${myblockchain.count}`);
 
     // Load blockchain from file
 
-    console.log("\nLoad Blockchain from file");
+    console.info("\nLoad Blockchain from file");
 
     let newblockchain = await loadChain("./data/blockchain.json");
 
-    console.log(`newblockchain blocks: ${newblockchain.count}`);
+    console.info(`newblockchain blocks: ${newblockchain.count}`);
 
-    console.log(`newblockchain is valid: ${newblockchain.validateChain()}`);
+    console.info(`newblockchain is valid: ${newblockchain.validateChain()}`);
 }
