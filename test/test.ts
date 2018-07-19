@@ -6,32 +6,9 @@ const expect = chai.expect;
 import Transaction from "../src/transaction";
 import Block from "../src/block";
 import Blockchain from "../src/blockchain";
-import { sha256Hash } from "../src/utils";
 
 declare var describe: any;
 declare var it: any;
-
-describe("Helper", function() {
-    describe("sha256Hash", function() {
-        it("should return true when hash value equals for the given input", function() {
-            assert.equal(sha256Hash("Test"), sha256Hash("Test"));
-        });
-
-        it("should return true when hash value not equals for the given input", function() {
-            assert.notEqual(sha256Hash("Test"), sha256Hash("test"));
-        });
-    });
-});
-
-describe("Transaction", function() {
-    let tx = new Transaction("Satheesh", "Chaitra", 10);
-
-    it("should be constructed", function() {
-        assert.equal(tx.sender, "Satheesh");
-        assert.equal(tx.receiver, "Chaitra");
-        assert.equal(tx.amount, 10);
-    });
-});
 
 describe("Block", function() {
     let tx = new Transaction("Satheesh", "Chaitra", 10);
