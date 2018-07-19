@@ -4,116 +4,114 @@ import Blockchain from "../blockchain";
 import { sha256Hash, saveChain, loadChain } from "../utils";
 
 export default async function main() {
-    // Creating List
-    let mylist = [1, 1, 2, 3, 5, 8];
-    console.info(`\nLength: ${mylist.length}`);
+  // Creating List
+  let mylist = [1, 1, 2, 3, 5, 8];
+  console.info(`\nLength: ${mylist.length}`);
 
-    // Appending to List
-    mylist.push(13);
-    console.info("\nList Elements: ", mylist);
+  // Appending to List
+  mylist.push(13);
+  console.info("\nList Elements: ", mylist);
 
-    // Slicing list
-    console.info("\nSlicing List");
+  // Slicing list
+  console.info("\nSlicing List");
 
-    console.info("slice(1,3): ", mylist.slice(1, 3));
-    console.info("slice(0,3): ", mylist.slice(0, 3));
-    console.info("slice(-1): ", mylist.slice(-1));
-    console.info("slice(-2): ", mylist.slice(-2));
+  console.info("slice(1,3): ", mylist.slice(1, 3));
+  console.info("slice(0,3): ", mylist.slice(0, 3));
+  console.info("slice(-1): ", mylist.slice(-1));
+  console.info("slice(-2): ", mylist.slice(-2));
 
-    // Iterating list
-    console.info("\nIterating List");
-    for (let item of mylist) {
-        console.info(item);
-    }
+  // Iterating list
+  console.info("\nIterating List");
+  for (let item of mylist) {
+    console.info(item);
+  }
 
-    // Dict
-    let person = { name: "Senthilnathan", country: "India", age: 34 };
-    console.info("\nDict: ", person);
+  // Dict
+  let person = { name: "Senthilnathan", country: "India", age: 34 };
+  console.info("\nDict: ", person);
 
-    // Creating hash for a string
+  // Creating hash for a string
 
-    console.info(
-        "\nHash for 'Blockchain is simple': ",
-        sha256Hash("Blockchain is simple")
-    );
+  console.info(
+    "\nHash for 'Blockchain is simple': ",
+    sha256Hash("Blockchain is simple")
+  );
 
-    // Creating first block
+  // Creating first block
 
-    let txn1 = new Transaction("Senthilnathan", "Naguvan", 10);
+  let txn1 = new Transaction("Senthilnathan", "Naguvan", 10);
 
-    console.info("\n" + txn1.toString());
+  console.info("\n" + txn1.toString());
 
-    let txn2 = new Transaction("Naguvan", "Dev", 20);
+  let txn2 = new Transaction("Naguvan", "Dev", 20);
 
-    console.info("\n" + txn2.toString());
+  console.info("\n" + txn2.toString());
 
-    let myblockchain = new Blockchain();
+  let myblockchain = new Blockchain();
 
-    let block = new Block(myblockchain.recentBlock);
+  let block = new Block(myblockchain.recentBlock);
 
-    block.addTransaction(txn1);
+  block.addTransaction(txn1);
 
-    block.addTransaction(txn2);
+  block.addTransaction(txn2);
 
-    console.info(`\nTransaction Count: ${block.transactionCount}`);
+  console.info(`\nTransaction Count: ${block.transactionCount}`);
 
+  block.finalize();
+
+  console.info(`\nValidate Block: ${block.validate()}`);
+
+  // let txn3 = new Transaction("Pardha", "Vinita", 30);
+
+  // block.addTransaction(txn3);
+
+  console.info(`\nTransaction Count: ${block.transactionCount}`);
+
+  console.info(`\nValidate Block (Before Finalize): ${block.validate()}`);
+
+  try {
     block.finalize();
+  } catch (err) {
+    console.info(`Expected error. re calling finalize throws error`);
+  }
 
-    console.info(`\nValidate Block: ${block.validate()}`);
+  console.info(`\nValidate Block (After Finalize): ${block.validate()}`);
 
-    // let txn3 = new Transaction("Pardha", "Vinita", 30);
+  myblockchain.addBlock(block);
 
-    // block.addTransaction(txn3);
+  myblockchain.validateChain();
 
-    console.info(`\nTransaction Count: ${block.transactionCount}`);
+  // Creating second block
 
-    console.info(`\nValidate Block (Before Finalize): ${block.validate()}`);
+  txn1 = new Transaction("Naguvan", "Sasha", 50);
 
-    try {
-        block.finalize();
-    } catch (err) {
-        console.info(`Expected error. re calling finalize throws error`);
-    }
+  block = new Block(myblockchain.recentBlock);
 
-    console.info(`\nValidate Block (After Finalize): ${block.validate()}`);
+  block.addTransaction(txn1);
 
-    myblockchain.addBlock(block);
+  block.finalize();
 
-    myblockchain.validateChain();
+  myblockchain.addBlock(block);
 
-    // Creating second block
+  console.info(`\nLength of Blockchain: ${myblockchain.count}`);
 
-    txn1 = new Transaction("Naguvan", "Sasha", 50);
+  console.info(`myblockchain is valid: ${myblockchain.validateChain()}`);
 
-    block = new Block(myblockchain.recentBlock);
+  // Save blockchain to file
 
-    block.addTransaction(txn1);
+  if (await saveChain("./data/blockchain.json", myblockchain)) {
+    console.info("\nBlockchain saved successfully into file blockchain.json");
+  }
 
-    block.finalize();
+  console.info(`myblockchain blocks: ${myblockchain.count}`);
 
-    myblockchain.addBlock(block);
+  // Load blockchain from file
 
-    console.info(`\nLength of Blockchain: ${myblockchain.count}`);
+  console.info("\nLoad Blockchain from file");
 
-    console.info(`myblockchain is valid: ${myblockchain.validateChain()}`);
+  let newblockchain = await loadChain("./data/blockchain.json");
 
-    // Save blockchain to file
+  console.info(`newblockchain blocks: ${newblockchain.count}`);
 
-    if (await saveChain("./data/blockchain.json", myblockchain)) {
-        console.info(
-            "\nBlockchain saved successfully into file blockchain.json"
-        );
-    }
-
-    console.info(`myblockchain blocks: ${myblockchain.count}`);
-
-    // Load blockchain from file
-
-    console.info("\nLoad Blockchain from file");
-
-    let newblockchain = await loadChain("./data/blockchain.json");
-
-    console.info(`newblockchain blocks: ${newblockchain.count}`);
-
-    console.info(`newblockchain is valid: ${newblockchain.validateChain()}`);
+  console.info(`newblockchain is valid: ${newblockchain.validateChain()}`);
 }
